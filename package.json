@@ -16,6 +16,7 @@
     "prepare": "npm run snyk-protect"
   },
   "dependencies": {
+    "acorn": "^6.2.1",
     "extend": "~3.0.2",
     "hof": "^13.3.3",
     "hof-behaviour-emailer": "^2.2.0",
@@ -36,7 +37,7 @@
   },
   "devDependencies": {
     "chai": "^4.2.0",
-    "eslint": "^5.15.1",
+    "eslint": "^5.16.0",
     "eslint-config-homeoffice": "^2.2.0",
     "fast-lorem-ipsum": "^1.2.0",
     "funkie": "0.0.6",
