@@ -20,12 +20,12 @@ function pressBrowserBackButton(I) {
     });
 }
 
-Feature('Does not cache personal data in form');
-Before((I, startPage) => {
-    I.clearCookie();
-    I.amOnPage(startPage.url);
-    I.click('Start');
-});
+// Feature('Does not cache personal data in form');
+// Before((I, startPage) => {
+//     I.clearCookie();
+//     I.amOnPage(startPage.url);
+//     I.click('Start');
+// });
 
 Scenario('Once the form is submitted, pressing back button stops user getting back to form data',
     function(I) {
