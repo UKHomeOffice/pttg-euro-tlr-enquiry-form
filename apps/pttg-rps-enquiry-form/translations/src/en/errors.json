@@ -1,6 +1,6 @@
 {
   "default": {
-    "title": "Sorry, there is a problem with the enquiry form",
+    "title": "Sorry, something went wrong",
     "message": "A server exception occurred. Please try again."
   },
   "session": {

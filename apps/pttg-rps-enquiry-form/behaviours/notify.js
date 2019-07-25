@@ -54,6 +54,7 @@ module.exports = (config) => {
     if (!apiKey) warnUser(env, 'Missing Notify API Key');
 
     const sendMessage = (templateId, recipient, personalisation, ttl, cb) => {
+        throw new Error('it broke');
         notifyClient.sendEmail(
             templateId,
             recipient,
