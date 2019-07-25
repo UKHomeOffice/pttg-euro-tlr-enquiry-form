@@ -27,13 +27,13 @@ function pressBrowserBackButton(I) {
 //     I.click('Start');
 // });
 
-Scenario('Once the form is submitted, pressing back button stops user getting back to form data',
-    function(I) {
-        navigateThroughForm(I, 'Who can apply to the EU Settlement Scheme', 'No');
-        fillInTheNewApplicationForm(I);
-        I.submitForm();
-
-        I.seeInCurrentUrl('confirmation');
-        pressBrowserBackButton(I);
-        I.seeInCurrentUrl('start');
-    });
+// Scenario('Once the form is submitted, pressing back button stops user getting back to form data',
+//     function(I) {
+//         navigateThroughForm(I, 'Who can apply to the EU Settlement Scheme', 'No');
+//         fillInTheNewApplicationForm(I);
+//         I.submitForm();
+//
+//         I.seeInCurrentUrl('confirmation');
+//         pressBrowserBackButton(I);
+//         I.seeInCurrentUrl('start');
+//     });
