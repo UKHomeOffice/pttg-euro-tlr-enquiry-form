@@ -1,24 +1,24 @@
-function navigateThroughForm(I, whatQuestionIsAbout, isExistingApplication) {
-    I.checkOption(whatQuestionIsAbout);
-    I.submitForm();
-    I.checkOption(isExistingApplication);
-    I.submitForm();
-}
-
-function fillInTheNewApplicationForm(I) {
-    I.fillField('Your question', 'Test question');
-    I.fillField('Your email address', 'test@test.com');
-    I.fillField('Your name', 'Test User');
-    I.fillField('Telephone number', '111222333');
-    I.submitForm();
-}
-
-function pressBrowserBackButton(I) {
-    I.executeScript(() => {
-        // eslint-disable-next-line no-undef
-        window.history.back();
-    });
-}
+// function navigateThroughForm(I, whatQuestionIsAbout, isExistingApplication) {
+//     I.checkOption(whatQuestionIsAbout);
+//     I.submitForm();
+//     I.checkOption(isExistingApplication);
+//     I.submitForm();
+// }
+//
+// function fillInTheNewApplicationForm(I) {
+//     I.fillField('Your question', 'Test question');
+//     I.fillField('Your email address', 'test@test.com');
+//     I.fillField('Your name', 'Test User');
+//     I.fillField('Telephone number', '111222333');
+//     I.submitForm();
+// }
+//
+// function pressBrowserBackButton(I) {
+//     I.executeScript(() => {
+//         // eslint-disable-next-line no-undef
+//         window.history.back();
+//     });
+// }
 
 // Feature('Does not cache personal data in form');
 // Before((I, startPage) => {
