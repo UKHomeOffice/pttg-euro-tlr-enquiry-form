@@ -54,22 +54,23 @@ module.exports = (config) => {
     if (!apiKey) warnUser(env, 'Missing Notify API Key');
 
     const sendMessage = (templateId, recipient, personalisation, ttl, cb) => {
-        notifyClient.sendEmail(
-            templateId,
-            recipient,
-            personalisation
-        ).then(response => {
-            log.info('Support Enquiry Email sent successfully');
-            log.debug(response);
-            return cb(null, response);
-        }).catch(err => {
-            if (ttl-- > 0) {
-                log.warn(`Retrying send -- ttl now ${ttl}`);
-                return sendMessage(templateId, recipient, personalisation, ttl, cb);
-            }
-            log.error('Failure sending');
-            return cb(err, null);
-        });
+      throw new Error ('testing');
+        // notifyClient.sendEmail(
+            // templateId,
+            // recipient,
+            // personalisation
+        // ).then(response => {
+            // log.info('Support Enquiry Email sent successfully');
+            // log.debug(response);
+        // }).catch(err => {
+          // return cb(null, response);
+            // if (ttl-- > 0) {
+                // log.warn(`Retrying send -- ttl now ${ttl}`);
+                // return sendMessage(templateId, recipient, personalisation, ttl, cb);
+            // }
+            // log.error('Failure sending');
+            // return cb(err, null);
+        // });
     };
 
 
