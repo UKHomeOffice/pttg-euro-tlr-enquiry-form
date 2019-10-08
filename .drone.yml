@@ -6,129 +6,129 @@ pipeline:
     environment:
       - DOCKER_HOST=tcp://172.17.0.1:2375
     commands:
-      - docker build -t pttg-rps-enquiry .
+      - docker build -t pttg-euro-tlr-enquiry-form .
     when:
       event: push
 
-  lint:
-    group: build
-    image: quay.io/ukhomeofficedigital/nodejs-base:v8.11.1
-    commands:
-      - npm install eslint
-      - npm run test:lint
-    when:
-      event: push
-
-  build-test:
-    group: build
-    image: docker:18.03.1-ce
-    environment:
-      - DOCKER_HOST=tcp://172.17.0.1:2375
-    commands:
-      - docker build -f Dockerfile_test -t test-$${DRONE_COMMIT_SHA} .
-    when:
-      event: push
-
-  test:
-    group: test
-    image: docker:18.03.1-ce
-    environment:
-      - DOCKER_HOST=tcp://172.17.0.1:2375
-    commands:
-      - docker run -d --name=redis-$${DRONE_COMMIT_SHA} redis
-      - docker run -d -e NODE_ENV=ci --name=app-$${DRONE_COMMIT_SHA} --net=container:redis-$${DRONE_COMMIT_SHA} pttg-rps-enquiry
-      - docker run -d --net=container:app-$${DRONE_COMMIT_SHA} --name=selenium-$${DRONE_COMMIT_SHA} selenium/standalone-chrome
-      - docker run --rm --net=container:selenium-$${DRONE_COMMIT_SHA} -e SELENIUM_TCP=tcp://localhost:4444 martin/wait
-      - docker run --rm --net=container:app-$${DRONE_COMMIT_SHA} test-$${DRONE_COMMIT_SHA}
-      - docker rm -vf "app-$${DRONE_COMMIT_SHA}" "redis-$${DRONE_COMMIT_SHA}"
-    when:
-      event: push
-
-  install-docker-image:
-    image: docker:18.03.1-ce
-    environment:
-      - DOCKER_HOST=tcp://172.17.0.1:2375
-    secrets:
-      - docker_password
-    commands:
-      - docker login -u="ukhomeofficedigital+pttg" -p=$${DOCKER_PASSWORD} quay.io
-      - docker tag pttg-rps-enquiry quay.io/ukhomeofficedigital/pttg-rps-enquiry:build-$${DRONE_BUILD_NUMBER}
-      - docker push quay.io/ukhomeofficedigital/pttg-rps-enquiry:build-$${DRONE_BUILD_NUMBER}
-    when:
-      branch: master
-      event: push
-
-  tag-docker-image-with-git-tag:
-    image: docker:18.03.1-ce
-    environment:
-      - DOCKER_HOST=tcp://172.17.0.1:2375
-    secrets:
-      - docker_password
-    commands:
-      - docker login -u="ukhomeofficedigital+pttg" -p=$${DOCKER_PASSWORD} quay.io
-      - docker tag pttg-rps-enquiry quay.io/ukhomeofficedigital/pttg-rps-enquiry:$${DRONE_TAG}
-      - docker push quay.io/ukhomeofficedigital/pttg-rps-enquiry:$${DRONE_TAG}
-    when:
-      event: tag
-
-  clone-kube-project:
-    image: plugins/git
-    commands:
-      - git clone https://github.com/UKHomeOffice/kube-pttg-rps-enquiry-form.git
-      - cd kube-pttg-rps-enquiry-form
-      - git checkout $${KUBE_BRANCH:=master}
-    when:
-      event: [push, deployment, tag]
-
-  deploy-to-dev-from-build-number:
-    image: quay.io/ukhomeofficedigital/kd:latest
-    environment:
-      - KUBE_NAMESPACE=pttg-rps-enquiry-dev
-      - ENVIRONMENT=dev
-      - VERSION=build-${DRONE_BUILD_NUMBER}
-      - KUBE_SERVER=https://kube-api-notprod.notprod.acp.homeoffice.gov.uk
-      - WHITELIST=62.25.109.196/32,52.48.127.150/32,52.48.127.151/32,52.48.127.152/32,52.48.127.153/32,52.209.62.128/25,52.56.62.128/25,185.22.224.96,185.22.224.96/32,185.22.226.96/32,213.251.23.180/30,213.251.23.184/30,213.251.23.188/30,148.253.134.213/32,167.98.162.0/25,167.98.158.128/25
-    secrets:
-      - pttg_rps_dev
-      - basic_auth
-    commands:
-      - cd kube-pttg-rps-enquiry-form
-      - ./deploy.sh
-    when:
-      branch: master
-      event: [push, tag]
-
-  deployment:
-    image: quay.io/ukhomeofficedigital/kd:latest
-    environment:
-      - KUBE_NAMESPACE=pttg-rps-enquiry-${DRONE_DEPLOY_TO}
-      - ENVIRONMENT=${DRONE_DEPLOY_TO}
-      - KUBE_SERVER=https://kube-api-notprod.notprod.acp.homeoffice.gov.uk
-      - WHITELIST=62.25.109.196/32,52.48.127.150/32,52.48.127.151/32,52.48.127.152/32,52.48.127.153/32,52.209.62.128/25,52.56.62.128/25,185.22.224.96,185.22.224.96/32,185.22.226.96/32,213.251.23.180/30,213.251.23.184/30,213.251.23.188/30,148.253.134.213/32,167.98.162.0/25,167.98.158.128/25
-    secrets:
-      - pttg_rps_dev
-      - pttg_rps_test
-      - basic_auth
-      - notify_recipient_notprod
-    commands:
-      - cd kube-pttg-rps-enquiry-form
-      - ./deploy.sh
-    when:
-      event: deployment
-      environment: [dev, test]
-
-  deploy-to-prod:
-    image: quay.io/ukhomeofficedigital/kd:latest
-    environment:
-      - KUBE_NAMESPACE=pttg-rps-enquiry-pr
-      - ENVIRONMENT=pr
-      - KUBE_SERVER=https://kube-api-prod.prod.acp.homeoffice.gov.uk
-    secrets:
-      - pttg_rps_pr
-      - notify_recipient_prod
-    commands:
-      - cd kube-pttg-rps-enquiry-form
-      - ./deploy.sh
-    when:
-      event: deployment
-      environment: pr
+  # lint:
+  #   group: build
+  #   image: quay.io/ukhomeofficedigital/nodejs-base:v8.11.1
+  #   commands:
+  #     - npm install eslint
+  #     - npm run test:lint
+  #   when:
+  #     event: push
+  #
+  # build-test:
+  #   group: build
+  #   image: docker:18.03.1-ce
+  #   environment:
+  #     - DOCKER_HOST=tcp://172.17.0.1:2375
+  #   commands:
+  #     - docker build -f Dockerfile_test -t test-$${DRONE_COMMIT_SHA} .
+  #   when:
+  #     event: push
+  #
+  # test:
+  #   group: test
+  #   image: docker:18.03.1-ce
+  #   environment:
+  #     - DOCKER_HOST=tcp://172.17.0.1:2375
+  #   commands:
+  #     - docker run -d --name=redis-$${DRONE_COMMIT_SHA} redis
+  #     - docker run -d -e NODE_ENV=ci --name=app-$${DRONE_COMMIT_SHA} --net=container:redis-$${DRONE_COMMIT_SHA} pttg-rps-enquiry
+  #     - docker run -d --net=container:app-$${DRONE_COMMIT_SHA} --name=selenium-$${DRONE_COMMIT_SHA} selenium/standalone-chrome
+  #     - docker run --rm --net=container:selenium-$${DRONE_COMMIT_SHA} -e SELENIUM_TCP=tcp://localhost:4444 martin/wait
+  #     - docker run --rm --net=container:app-$${DRONE_COMMIT_SHA} test-$${DRONE_COMMIT_SHA}
+  #     - docker rm -vf "app-$${DRONE_COMMIT_SHA}" "redis-$${DRONE_COMMIT_SHA}"
+  #   when:
+  #     event: push
+  #
+  # install-docker-image:
+  #   image: docker:18.03.1-ce
+  #   environment:
+  #     - DOCKER_HOST=tcp://172.17.0.1:2375
+  #   secrets:
+  #     - docker_password
+  #   commands:
+  #     - docker login -u="ukhomeofficedigital+pttg" -p=$${DOCKER_PASSWORD} quay.io
+  #     - docker tag pttg-rps-enquiry quay.io/ukhomeofficedigital/pttg-rps-enquiry:build-$${DRONE_BUILD_NUMBER}
+  #     - docker push quay.io/ukhomeofficedigital/pttg-rps-enquiry:build-$${DRONE_BUILD_NUMBER}
+  #   when:
+  #     branch: master
+  #     event: push
+  #
+  # tag-docker-image-with-git-tag:
+  #   image: docker:18.03.1-ce
+  #   environment:
+  #     - DOCKER_HOST=tcp://172.17.0.1:2375
+  #   secrets:
+  #     - docker_password
+  #   commands:
+  #     - docker login -u="ukhomeofficedigital+pttg" -p=$${DOCKER_PASSWORD} quay.io
+  #     - docker tag pttg-rps-enquiry quay.io/ukhomeofficedigital/pttg-rps-enquiry:$${DRONE_TAG}
+  #     - docker push quay.io/ukhomeofficedigital/pttg-rps-enquiry:$${DRONE_TAG}
+  #   when:
+  #     event: tag
+  #
+  # clone-kube-project:
+  #   image: plugins/git
+  #   commands:
+  #     - git clone https://github.com/UKHomeOffice/kube-pttg-rps-enquiry-form.git
+  #     - cd kube-pttg-rps-enquiry-form
+  #     - git checkout $${KUBE_BRANCH:=master}
+  #   when:
+  #     event: [push, deployment, tag]
+  #
+  # deploy-to-dev-from-build-number:
+  #   image: quay.io/ukhomeofficedigital/kd:latest
+  #   environment:
+  #     - KUBE_NAMESPACE=pttg-rps-enquiry-dev
+  #     - ENVIRONMENT=dev
+  #     - VERSION=build-${DRONE_BUILD_NUMBER}
+  #     - KUBE_SERVER=https://kube-api-notprod.notprod.acp.homeoffice.gov.uk
+  #     - WHITELIST=62.25.109.196/32,52.48.127.150/32,52.48.127.151/32,52.48.127.152/32,52.48.127.153/32,52.209.62.128/25,52.56.62.128/25,185.22.224.96,185.22.224.96/32,185.22.226.96/32,213.251.23.180/30,213.251.23.184/30,213.251.23.188/30,148.253.134.213/32,167.98.162.0/25,167.98.158.128/25
+  #   secrets:
+  #     - pttg_rps_dev
+  #     - basic_auth
+  #   commands:
+  #     - cd kube-pttg-rps-enquiry-form
+  #     - ./deploy.sh
+  #   when:
+  #     branch: master
+  #     event: [push, tag]
+  #
+  # deployment:
+  #   image: quay.io/ukhomeofficedigital/kd:latest
+  #   environment:
+  #     - KUBE_NAMESPACE=pttg-rps-enquiry-${DRONE_DEPLOY_TO}
+  #     - ENVIRONMENT=${DRONE_DEPLOY_TO}
+  #     - KUBE_SERVER=https://kube-api-notprod.notprod.acp.homeoffice.gov.uk
+  #     - WHITELIST=62.25.109.196/32,52.48.127.150/32,52.48.127.151/32,52.48.127.152/32,52.48.127.153/32,52.209.62.128/25,52.56.62.128/25,185.22.224.96,185.22.224.96/32,185.22.226.96/32,213.251.23.180/30,213.251.23.184/30,213.251.23.188/30,148.253.134.213/32,167.98.162.0/25,167.98.158.128/25
+  #   secrets:
+  #     - pttg_rps_dev
+  #     - pttg_rps_test
+  #     - basic_auth
+  #     - notify_recipient_notprod
+  #   commands:
+  #     - cd kube-pttg-rps-enquiry-form
+  #     - ./deploy.sh
+  #   when:
+  #     event: deployment
+  #     environment: [dev, test]
+  #
+  # deploy-to-prod:
+  #   image: quay.io/ukhomeofficedigital/kd:latest
+  #   environment:
+  #     - KUBE_NAMESPACE=pttg-rps-enquiry-pr
+  #     - ENVIRONMENT=pr
+  #     - KUBE_SERVER=https://kube-api-prod.prod.acp.homeoffice.gov.uk
+  #   secrets:
+  #     - pttg_rps_pr
+  #     - notify_recipient_prod
+  #   commands:
+  #     - cd kube-pttg-rps-enquiry-form
+  #     - ./deploy.sh
+  #   when:
+  #     event: deployment
+  #     environment: pr
