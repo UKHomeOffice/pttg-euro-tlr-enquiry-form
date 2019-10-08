@@ -1,9 +1,9 @@
-Use this form to ask a question about applying for settled status under the EU Settlement Scheme. We’ll reply within 5 working days.
+Use this form to ask a question about applying for Euro TLR. We’ll reply within 5 working days.
 
 ## Before you start
 
-You may find the answer to your question here
-[Settled and pre-settled status for EU citizens and their families](https://www.gov.uk/settled-status-eu-citizens-families).
+Check the guidance on
+[European Temporary Leave to Remain](https://www.gov.uk/european-temporary-leave-to-remain-in-the-uk) to find out if you are eligible and how to apply.
 
 ## What you’ll need
 
