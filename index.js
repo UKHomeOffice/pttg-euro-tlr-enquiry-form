@@ -1,6 +1,6 @@
 const hof = require('hof');
 const settings = require('./config');
-const notifyMessages = require('./apps/pttg-rps-enquiry-form/behaviours/notify-delivery-messages');
+const notifyMessages = require('./apps/pttg-euro-tlr-enquiry-form/behaviours/notify-delivery-messages');
 
 settings.routes = settings.routes.map(route => require(route));
 settings.root = __dirname;

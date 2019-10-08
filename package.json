@@ -47,19 +47,19 @@
     "so-acceptance": "^6.0.0",
     "supertest": "^3.4.2"
   },
-  "name": "pttg-rps-enquiry-form",
+  "name": "pttg-euro-tlr-enquiry-form",
   "version": "1.0.0",
   "main": "index.js",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/UKHomeOffice/pttg-rps-enquiry-form.git"
+    "url": "git+https://github.com/UKHomeOffice/pttg-euro-tlr-enquiry-form.git"
   },
   "keywords": [],
   "author": "",
   "bugs": {
-    "url": "https://github.com/UKHomeOffice/pttg-rps-enquiry-form/issues"
+    "url": "https://github.com/UKHomeOffice/pttg-euro-tlr-enquiry-form/issues"
   },
-  "homepage": "https://github.com/UKHomeOffice/pttg-rps-enquiry-form#readme",
+  "homepage": "https://github.com/UKHomeOffice/pttg-euro-tlr-enquiry-form#readme",
   "description": "",
   "snyk": true
 }

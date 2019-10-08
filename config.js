@@ -17,10 +17,10 @@ module.exports = {
     },
     theme: 'govuk',
     routes: [
-        './apps/pttg-rps-enquiry-form'
+        './apps/pttg-euro-tlr-enquiry-form'
     ],
     'session': {
-        'name': 'pttg-rps-enquiry-form.hof.sid',
+        'name': 'pttg-euro-tlr-enquiry-form.hof.sid',
         // NODE_ENV is set by drone during deployments. Leave unset or not equal to 'production' for local develompent
         // so that cookie (and therefore session) works over HTTP
         cookie: {secure: (process.env.NODE_ENV === 'production')}

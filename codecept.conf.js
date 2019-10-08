@@ -2,10 +2,10 @@ const path = require('path');
 
 /* eslint implicit-dependencies/no-implicit: [2, { dev: true }] */
 const pagesPath = page => path.resolve(__dirname,
-    `./apps/pttg-rps-enquiry-form/acceptance/pages/${page}`);
+    `./apps/pttg-euro-tlr-enquiry-form/acceptance/pages/${page}`);
 
 module.exports = require('so-acceptance').extend({
-    name: 'pttg-rps-enquiry-form',
+    name: 'pttg-euro-tlr-enquiry-form',
     tests: './apps/*/acceptance/features/**/*.js',
     helpers: {
         WebDriverIO: {

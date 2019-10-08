@@ -25,7 +25,7 @@ const pagesToSteps = pages => (pages.reduce((obj, item) => {
 }, {}));
 
 module.exports = {
-    name: 'pttg-rps-enquiry-form',
+    name: 'pttg-euro-tlr-enquiry-form',
     steps: pagesToSteps([
         StartPage,
         PrivacyNotice,
