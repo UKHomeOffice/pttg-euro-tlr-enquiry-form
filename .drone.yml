@@ -10,67 +10,99 @@ pipeline:
     when:
       event: push
 
-  # lint:
-  #   group: build
-  #   image: quay.io/ukhomeofficedigital/nodejs-base:v8.11.1
-  #   commands:
-  #     - npm install eslint
-  #     - npm run test:lint
-  #   when:
-  #     event: push
-  #
-  # build-test:
-  #   group: build
-  #   image: docker:18.03.1-ce
-  #   environment:
-  #     - DOCKER_HOST=tcp://172.17.0.1:2375
-  #   commands:
-  #     - docker build -f Dockerfile_test -t test-$${DRONE_COMMIT_SHA} .
-  #   when:
-  #     event: push
-  #
-  # test:
-  #   group: test
-  #   image: docker:18.03.1-ce
-  #   environment:
-  #     - DOCKER_HOST=tcp://172.17.0.1:2375
-  #   commands:
-  #     - docker run -d --name=redis-$${DRONE_COMMIT_SHA} redis
-  #     - docker run -d -e NODE_ENV=ci --name=app-$${DRONE_COMMIT_SHA} --net=container:redis-$${DRONE_COMMIT_SHA} pttg-rps-enquiry
-  #     - docker run -d --net=container:app-$${DRONE_COMMIT_SHA} --name=selenium-$${DRONE_COMMIT_SHA} selenium/standalone-chrome
-  #     - docker run --rm --net=container:selenium-$${DRONE_COMMIT_SHA} -e SELENIUM_TCP=tcp://localhost:4444 martin/wait
-  #     - docker run --rm --net=container:app-$${DRONE_COMMIT_SHA} test-$${DRONE_COMMIT_SHA}
-  #     - docker rm -vf "app-$${DRONE_COMMIT_SHA}" "redis-$${DRONE_COMMIT_SHA}"
-  #   when:
-  #     event: push
-  #
-  # install-docker-image:
-  #   image: docker:18.03.1-ce
-  #   environment:
-  #     - DOCKER_HOST=tcp://172.17.0.1:2375
-  #   secrets:
-  #     - docker_password
-  #   commands:
-  #     - docker login -u="ukhomeofficedigital+pttg" -p=$${DOCKER_PASSWORD} quay.io
-  #     - docker tag pttg-rps-enquiry quay.io/ukhomeofficedigital/pttg-rps-enquiry:build-$${DRONE_BUILD_NUMBER}
-  #     - docker push quay.io/ukhomeofficedigital/pttg-rps-enquiry:build-$${DRONE_BUILD_NUMBER}
-  #   when:
-  #     branch: master
-  #     event: push
-  #
-  # tag-docker-image-with-git-tag:
-  #   image: docker:18.03.1-ce
-  #   environment:
-  #     - DOCKER_HOST=tcp://172.17.0.1:2375
-  #   secrets:
-  #     - docker_password
-  #   commands:
-  #     - docker login -u="ukhomeofficedigital+pttg" -p=$${DOCKER_PASSWORD} quay.io
-  #     - docker tag pttg-rps-enquiry quay.io/ukhomeofficedigital/pttg-rps-enquiry:$${DRONE_TAG}
-  #     - docker push quay.io/ukhomeofficedigital/pttg-rps-enquiry:$${DRONE_TAG}
-  #   when:
-  #     event: tag
-  #
+  lint:
+    group: build
+    image: quay.io/ukhomeofficedigital/nodejs-base:v8.11.1
+    commands:
+      - npm install eslint
+      - npm run test:lint
+    when:
+      event: push
+
+  build-test:
+    group: build
+    image: docker:18.03.1-ce
+    environment:
+      - DOCKER_HOST=tcp://172.17.0.1:2375
+    commands:
+      - docker build -f Dockerfile_test -t test-$${DRONE_COMMIT_SHA} .
+    when:
+      event: push
+
+  test:
+    group: test
+    image: docker:18.03.1-ce
+    environment:
+      - DOCKER_HOST=tcp://172.17.0.1:2375
+    commands:
+      - docker run -d --name=redis-$${DRONE_COMMIT_SHA} redis
+      - docker run -d -e NODE_ENV=ci --name=app-$${DRONE_COMMIT_SHA} --net=container:redis-$${DRONE_COMMIT_SHA} pttg-euro-tlr-enquiry-form
+      - docker run -d --net=container:app-$${DRONE_COMMIT_SHA} --name=selenium-$${DRONE_COMMIT_SHA} selenium/standalone-chrome
+      - docker run --rm --net=container:selenium-$${DRONE_COMMIT_SHA} -e SELENIUM_TCP=tcp://localhost:4444 martin/wait
+      - docker run --rm --net=container:app-$${DRONE_COMMIT_SHA} test-$${DRONE_COMMIT_SHA}
+      - docker rm -vf "app-$${DRONE_COMMIT_SHA}" "redis-$${DRONE_COMMIT_SHA}"
+    when:
+      event: push
+
+  install-docker-image-with-githash-tag:
+    image: docker:18.03.1-ce
+    environment:
+      - DOCKER_HOST=tcp://172.17.0.1:2375
+    secrets:
+      - docker_password
+    commands:
+      - docker login -u="ukhomeofficedigital+pttg_euro_tlr_enquiry_form" -p=$${DOCKER_PASSWORD} quay.io
+      - docker tag pttg-euro-tlr-enquiry-form quay.io/ukhomeofficedigital/pttg-euro-tlr-enquiry-form:${DRONE_COMMIT_SHA:0:8}
+      - docker push quay.io/ukhomeofficedigital/pttg-euro-tlr-enquiry-form:${DRONE_COMMIT_SHA:0:8}
+    when:
+      event: push
+
+  install-docker-image-from-feature-branch-build:
+    image: docker:18.03.1-ce
+    environment:
+      - DOCKER_HOST=tcp://172.17.0.1:2375
+    secrets:
+      - docker_password
+    commands:
+      - docker login -u="ukhomeofficedigital+pttg_euro_tlr_enquiry_form" -p=$${DOCKER_PASSWORD} quay.io
+      - docker tag pttg-euro-tlr-enquiry-form quay.io/ukhomeofficedigital/pttg-euro-tlr-enquiry-form:${DRONE_BRANCH}
+      - docker push quay.io/ukhomeofficedigital/pttg-euro-tlr-enquiry-form:${DRONE_BRANCH}
+    when:
+      branch:
+        exclude: master
+      event: push
+
+  install-docker-image-from-master-branch-build:
+    image: docker:18.03.1-ce
+    environment:
+      - DOCKER_HOST=tcp://172.17.0.1:2375
+    secrets:
+      - docker_password
+    commands:
+      - docker login -u="ukhomeofficedigital+pttg_euro_tlr_enquiry_form" -p=$${DOCKER_PASSWORD} quay.io
+      - docker tag pttg-euro-tlr-enquiry-form quay.io/ukhomeofficedigital/pttg-euro-tlr-enquiry-form:latest
+      - docker push quay.io/ukhomeofficedigital/pttg-euro-tlr-enquiry-form:latest
+      - docker tag pttg-euro-tlr-enquiry-form quay.io/ukhomeofficedigital/pttg-euro-tlr-enquiry-form:build-$${DRONE_BUILD_NUMBER}
+      - docker push quay.io/ukhomeofficedigital/pttg-euro-tlr-enquiry-form:build-$${DRONE_BUILD_NUMBER}
+    when:
+      branch: master
+      event: push
+
+  tag-docker-image-with-git-tag:
+    image: docker:18.03.1-ce
+    environment:
+      - DOCKER_HOST=tcp://172.17.0.1:2375
+    secrets:
+      - docker_password
+    commands:
+      - docker login -u="ukhomeofficedigital+pttg_euro_tlr_enquiry_form" -p=$${DOCKER_PASSWORD} quay.io
+      - docker tag pttg-euro-tlr-enquiry-form quay.io/ukhomeofficedigital/pttg-euro-tlr-enquiry-form:$${DRONE_TAG}
+      - docker push quay.io/ukhomeofficedigital/pttg-euro-tlr-enquiry-form:$${DRONE_TAG}
+      - docker tag pttg-euro-tlr-enquiry-form quay.io/ukhomeofficedigital/pttg-euro-tlr-enquiry-form:${DRONE_COMMIT_SHA:0:8}
+      - docker push quay.io/ukhomeofficedigital/pttg-euro-tlr-enquiry-form:${DRONE_COMMIT_SHA:0:8}
+    when:
+      event: tag
+
   # clone-kube-project:
   #   image: plugins/git
   #   commands:
