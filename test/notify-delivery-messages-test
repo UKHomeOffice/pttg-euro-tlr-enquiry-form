@@ -34,7 +34,7 @@ describe('Slack delivery messages', function(){
                 this.webhook = mockSlackWebhook;
             }
         });
-        notifyMessages = mockRequire.reRequire('../apps/pttg-rps-enquiry-form/behaviours/notify-delivery-messages');
+        notifyMessages = mockRequire.reRequire('../apps/pttg-euro-tlr-enquiry-form/behaviours/notify-delivery-messages');
     });
 
     it('should return 200 for a POST with authorised bearer token', function(){
