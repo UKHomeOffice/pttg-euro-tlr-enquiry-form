@@ -51,7 +51,7 @@ pipeline:
     secrets:
       - docker_password
     commands:
-      - docker login -u="ukhomeofficedigital+pttg" -p=$${DOCKER_PASSWORD} quay.io
+      - docker login -u="ukhomeofficedigital+pttg_ip_smoke_tests" -p=$${DOCKER_PASSWORD} quay.io
       - docker tag pttg-euro-tlr-enquiry-form quay.io/ukhomeofficedigital/pttg-euro-tlr-enquiry-form:${DRONE_COMMIT_SHA:0:8}
       - docker push quay.io/ukhomeofficedigital/pttg-euro-tlr-enquiry-form:${DRONE_COMMIT_SHA:0:8}
     when:
@@ -64,7 +64,7 @@ pipeline:
     secrets:
       - docker_password
     commands:
-      - docker login -u="ukhomeofficedigital+pttg" -p=$${DOCKER_PASSWORD} quay.io
+      - docker login -u="ukhomeofficedigital+pttg_ip_smoke_tests" -p=$${DOCKER_PASSWORD} quay.io
       - docker tag pttg-euro-tlr-enquiry-form quay.io/ukhomeofficedigital/pttg-euro-tlr-enquiry-form:${DRONE_BRANCH}
       - docker push quay.io/ukhomeofficedigital/pttg-euro-tlr-enquiry-form:${DRONE_BRANCH}
     when:
@@ -79,7 +79,7 @@ pipeline:
     secrets:
       - docker_password
     commands:
-      - docker login -u="ukhomeofficedigital+pttg" -p=$${DOCKER_PASSWORD} quay.io
+      - docker login -u="ukhomeofficedigital+pttg_ip_smoke_tests" -p=$${DOCKER_PASSWORD} quay.io
       - docker tag pttg-euro-tlr-enquiry-form quay.io/ukhomeofficedigital/pttg-euro-tlr-enquiry-form:latest
       - docker push quay.io/ukhomeofficedigital/pttg-euro-tlr-enquiry-form:latest
       - docker tag pttg-euro-tlr-enquiry-form quay.io/ukhomeofficedigital/pttg-euro-tlr-enquiry-form:build-$${DRONE_BUILD_NUMBER}
@@ -95,7 +95,7 @@ pipeline:
     secrets:
       - docker_password
     commands:
-      - docker login -u="ukhomeofficedigital+pttg" -p=$${DOCKER_PASSWORD} quay.io
+      - docker login -u="ukhomeofficedigital+pttg_ip_smoke_tests" -p=$${DOCKER_PASSWORD} quay.io
       - docker tag pttg-euro-tlr-enquiry-form quay.io/ukhomeofficedigital/pttg-euro-tlr-enquiry-form:$${DRONE_TAG}
       - docker push quay.io/ukhomeofficedigital/pttg-euro-tlr-enquiry-form:$${DRONE_TAG}
       - docker tag pttg-euro-tlr-enquiry-form quay.io/ukhomeofficedigital/pttg-euro-tlr-enquiry-form:${DRONE_COMMIT_SHA:0:8}
