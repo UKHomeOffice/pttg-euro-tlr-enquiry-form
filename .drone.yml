@@ -103,64 +103,62 @@ pipeline:
     when:
       event: tag
 
-  # clone-kube-project:
-  #   image: plugins/git
-  #   commands:
-  #     - git clone https://github.com/UKHomeOffice/kube-pttg-rps-enquiry-form.git
-  #     - cd kube-pttg-rps-enquiry-form
-  #     - git checkout $${KUBE_BRANCH:=master}
-  #   when:
-  #     event: [push, deployment, tag]
-  #
-  # deploy-to-dev-from-build-number:
-  #   image: quay.io/ukhomeofficedigital/kd:latest
-  #   environment:
-  #     - KUBE_NAMESPACE=pttg-rps-enquiry-dev
-  #     - ENVIRONMENT=dev
-  #     - VERSION=build-${DRONE_BUILD_NUMBER}
-  #     - KUBE_SERVER=https://kube-api-notprod.notprod.acp.homeoffice.gov.uk
-  #     - WHITELIST=62.25.109.196/32,52.48.127.150/32,52.48.127.151/32,52.48.127.152/32,52.48.127.153/32,52.209.62.128/25,52.56.62.128/25,185.22.224.96,185.22.224.96/32,185.22.226.96/32,213.251.23.180/30,213.251.23.184/30,213.251.23.188/30,148.253.134.213/32,167.98.162.0/25,167.98.158.128/25
-  #   secrets:
-  #     - pttg_rps_dev
-  #     - basic_auth
-  #   commands:
-  #     - cd kube-pttg-rps-enquiry-form
-  #     - ./deploy.sh
-  #   when:
-  #     branch: master
-  #     event: [push, tag]
-  #
-  # deployment:
-  #   image: quay.io/ukhomeofficedigital/kd:latest
-  #   environment:
-  #     - KUBE_NAMESPACE=pttg-rps-enquiry-${DRONE_DEPLOY_TO}
-  #     - ENVIRONMENT=${DRONE_DEPLOY_TO}
-  #     - KUBE_SERVER=https://kube-api-notprod.notprod.acp.homeoffice.gov.uk
-  #     - WHITELIST=62.25.109.196/32,52.48.127.150/32,52.48.127.151/32,52.48.127.152/32,52.48.127.153/32,52.209.62.128/25,52.56.62.128/25,185.22.224.96,185.22.224.96/32,185.22.226.96/32,213.251.23.180/30,213.251.23.184/30,213.251.23.188/30,148.253.134.213/32,167.98.162.0/25,167.98.158.128/25
-  #   secrets:
-  #     - pttg_rps_dev
-  #     - pttg_rps_test
-  #     - basic_auth
-  #     - notify_recipient_notprod
-  #   commands:
-  #     - cd kube-pttg-rps-enquiry-form
-  #     - ./deploy.sh
-  #   when:
-  #     event: deployment
-  #     environment: [dev, test]
-  #
-  # deploy-to-prod:
-  #   image: quay.io/ukhomeofficedigital/kd:latest
-  #   environment:
-  #     - KUBE_NAMESPACE=pttg-rps-enquiry-pr
-  #     - ENVIRONMENT=pr
-  #     - KUBE_SERVER=https://kube-api-prod.prod.acp.homeoffice.gov.uk
-  #   secrets:
-  #     - pttg_rps_pr
-  #     - notify_recipient_prod
-  #   commands:
-  #     - cd kube-pttg-rps-enquiry-form
-  #     - ./deploy.sh
-  #   when:
-  #     event: deployment
-  #     environment: pr
+  clone-kube-project:
+    image: plugins/git
+    commands:
+      - git clone https://github.com/UKHomeOffice/kube-pttg-euro-tlr-enquiry-form.git
+      - cd kube-pttg-euro-tlr-enquiry-form
+      - git checkout $${KUBE_BRANCH:=master}
+    when:
+      event: [push, deployment, tag]
+
+  deploy-to-dev-from-build-number:
+    image: quay.io/ukhomeofficedigital/kd:latest
+    environment:
+      - KUBE_NAMESPACE=pttg-rps-enquiry-dev
+      - ENVIRONMENT=dev
+      - VERSION=build-${DRONE_BUILD_NUMBER}
+      - KUBE_SERVER=https://kube-api-notprod.notprod.acp.homeoffice.gov.uk
+      - WHITELIST=62.25.109.196/32,52.48.127.150/32,52.48.127.151/32,52.48.127.152/32,52.48.127.153/32,52.209.62.128/25,52.56.62.128/25,185.22.224.96,185.22.224.96/32,185.22.226.96/32,213.251.23.180/30,213.251.23.184/30,213.251.23.188/30,148.253.134.213/32,167.98.162.0/25,167.98.158.128/25
+    secrets:
+      - pttg_rps_dev
+    commands:
+      - cd kube-pttg-euro-tlr-enquiry-form
+      - ./deploy.sh
+    when:
+      branch: master
+      event: [push, tag]
+
+  deployment:
+    image: quay.io/ukhomeofficedigital/kd:latest
+    environment:
+      - KUBE_NAMESPACE=pttg-rps-enquiry-${DRONE_DEPLOY_TO}
+      - ENVIRONMENT=${DRONE_DEPLOY_TO}
+      - KUBE_SERVER=https://kube-api-notprod.notprod.acp.homeoffice.gov.uk
+      - WHITELIST=62.25.109.196/32,52.48.127.150/32,52.48.127.151/32,52.48.127.152/32,52.48.127.153/32,52.209.62.128/25,52.56.62.128/25,185.22.224.96,185.22.224.96/32,185.22.226.96/32,213.251.23.180/30,213.251.23.184/30,213.251.23.188/30,148.253.134.213/32,167.98.162.0/25,167.98.158.128/25
+    secrets:
+      - pttg_rps_dev
+      - pttg_rps_test
+      - notify_recipient_notprod
+    commands:
+      - cd kube-pttg-euro-tlr-enquiry-form
+      - ./deploy.sh
+    when:
+      event: deployment
+      environment: [dev, test]
+
+  deploy-to-prod:
+    image: quay.io/ukhomeofficedigital/kd:latest
+    environment:
+      - KUBE_NAMESPACE=pttg-rps-enquiry-pr
+      - ENVIRONMENT=pr
+      - KUBE_SERVER=https://kube-api-prod.prod.acp.homeoffice.gov.uk
+    secrets:
+      - pttg_rps_pr
+      - notify_recipient_prod
+    commands:
+      - cd kube-pttg-euro-tlr-enquiry-form
+      - ./deploy.sh
+    when:
+      event: deployment
+      environment: pr
