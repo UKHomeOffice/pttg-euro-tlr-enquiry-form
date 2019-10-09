@@ -3,7 +3,7 @@ Defnyddiwch y ffurflen hon i ofyn am wneud cais am statws sefydlog o dan y Cynll
 ## Cyn i chi ddechrau
 
 Efallai y dewch o hyd i’r ateb i’ch cwestiwn yma
-[Statws sefydlog a chyn-sefydlog i ddinasyddion yr UE a’u teuluoedd](https://www.gov.uk/settled-status-eu-citizens-families).
+[Statws sefydlog a chyn-sefydlog i ddinasyddion yr UE a’u teuluoedd](https://www.gov.uk/european-temporary-leave-to-remain-in-the-uk).
 
 ## Beth fyddwch ei angen
 

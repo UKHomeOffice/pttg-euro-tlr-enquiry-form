@@ -34,7 +34,7 @@ Scenario('I can leave the summary page without submitting the form',
 
         const feedbackLink = yield I.grabAttributeFrom('#feedback', 'href');
         const feedbackText = yield I.grabTextFrom('#feedback');
-        assert.equal(feedbackLink, 'https://www.gov.uk/done/eu-settled-status-enquiries');
+        assert.equal(feedbackLink, 'https://www.gov.uk/done/euro-tlr-enquiries');
         assert.equal(feedbackText, 'What did you think of this service?');
 
         const govUkHomePageLink = yield I.grabAttributeFrom('#returnToGovUk', 'href');
