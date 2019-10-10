@@ -1,9 +1,8 @@
-Defnyddiwch y ffurflen hon i ofyn am wneud cais am statws sefydlog o dan y Cynllun Preswylio’n Sefydlog i Ddinasyddion yr UE. Byddwn yn ymateb o fewn 5 diwrnod gwaith.
+Defnyddiwch y ffurflen hon i ofyn cwestiwn am wneud cais am Ganiatâd i Aros Dros Dro Ewropeaidd (Euro TLR). Byddwn yn ateb o fewn 5 diwrnod gwaith.
 
 ## Cyn i chi ddechrau
 
-Efallai y dewch o hyd i’r ateb i’ch cwestiwn yma
-[Statws sefydlog a chyn-sefydlog i ddinasyddion yr UE a’u teuluoedd](https://www.gov.uk/european-temporary-leave-to-remain-in-the-uk).
+Gwiriwch y canllawiau ar [Ganiatâd i Aros Dros Dro Ewropeaidd (Euro TLR)](https://www.gov.uk/european-temporary-leave-to-remain-in-the-uk) i ddarganfod os ydych yn gymwys a sut i wneud cais.
 
 ## Beth fyddwch ei angen
 
