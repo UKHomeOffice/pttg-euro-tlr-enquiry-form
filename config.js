@@ -2,7 +2,7 @@ module.exports = {
     env: process.env.NODE_ENV || 'development',
     loglevel: process.env.LOG_LEVEL || 'info',
     notify: {
-        apiKey: process.env.NOTIFY_API_KEY || 'configuration_placeholder-6f54eeb5-e901-48aa-b2fb-285af60b8e97-b79aafb9-dbfe-4c62-a7ca-95bd93dc45b3',
+        apiKey: process.env.NOTIFY_API_KEY || 'callbacktest-9eafa895-b7f4-487f-b4fa-8cb3a6796132-817b0178-02ff-45e9-9da2-df251b9c79b2',
         templates: {
             organisation: {
                 general: process.env.NOTIFY_TEMPLATE_ORG_GENERAL || '4fdc0fd3-31f6-447c-9184-ddfcd5042f42',
