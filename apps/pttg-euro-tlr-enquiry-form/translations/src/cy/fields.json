@@ -22,7 +22,7 @@
         "emailSubject": "Welsh Language"
       },
       "supporting-organisation": {
-        "label": "<span class=\"question-option\">Helpu rhywun i wneud cais</span><span id=\"your-question-option-supporting-organisation-option-hint\" class=\"option-hint\" for=\"your-question-option-supporting-organisation\">Dewiswch yr opsiwn hwn os ydych yn ffrind, aelod o'r teulu, cyflogwr, grŵp cymunedol neu sefydliad ategol sy’n holi ynglŷn â chais rhywun arall</span>",
+        "label": "<span class=\"question-option\">Helpu rhywun i wneud cais</span><span id=\"your-question-option-supporting-organisation-option-hint\" class=\"option-hint\" for=\"your-question-option-supporting-organisation\">Dewiswch yr opsiwn hwn os ydych yn ffrind, aelod o’r teulu, cyflogwr, grŵp cymunedol neu sefydliad ategol sy’n holi ynglŷn â chais rhywun arall</span>",
         "emailSubject": "Welsh Language"
       }
     }
