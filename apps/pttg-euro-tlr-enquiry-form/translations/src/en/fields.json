@@ -7,7 +7,7 @@
     "options": {
       "eligibility": {
         "label": "<span class=\"question-option\">Who can apply<span>",
-        "emailSubject": "What the EU Settlement Scheme is and who should apply"
+        "emailSubject": "What the Euro TLR Scheme is and who should apply"
       },
       "how-to-apply": {
         "label": "<span class=\"question-option\">How to apply and the application process<span><span id=\"your-question-option-how-to-apply-option-hint\" class=\"option-hint\" for=\"your-question-option-how-to-apply\">What you need to apply and help while you are applying</span>",
