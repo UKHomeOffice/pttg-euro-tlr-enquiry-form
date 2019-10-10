@@ -93,7 +93,7 @@
     }
   },
   "your-name": {
-    "label": "Eich enw",
+    "label": "Eich enw llawn",
     "validation": {
       "required": "Rhowch eich enw",
       "maxlength": "Mae’n rhaid i’r enw fod yn llai na 256 nod"
