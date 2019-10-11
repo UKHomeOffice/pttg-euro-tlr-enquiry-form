@@ -125,7 +125,7 @@ pipeline:
     secrets:
       - pttg_rps_dev
     commands:
-      - export WHITELIST="${POISE_RANGES},${GOVWIFI_RANGES},${ACPTUNNEL_RANGES}"
+      - export WHITELIST="$${POISE_RANGES},$${GOVWIFI_RANGES},$${ACPTUNNEL_RANGES}"
       - cd kube-pttg-euro-tlr-enquiry-form
       - ./deploy.sh
     when:
@@ -146,7 +146,7 @@ pipeline:
       - pttg_rps_test
       - notify_recipient_notprod
     commands:
-      - export WHITELIST="${POISE_RANGES},${GOVWIFI_RANGES},${ACPTUNNEL_RANGES}"
+      - export WHITELIST="$${POISE_RANGES},$${GOVWIFI_RANGES},$${ACPTUNNEL_RANGES}"
       - cd kube-pttg-euro-tlr-enquiry-form
       - ./deploy.sh
     when:
