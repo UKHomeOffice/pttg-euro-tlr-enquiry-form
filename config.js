@@ -26,8 +26,8 @@ module.exports = {
         cookie: {secure: (process.env.NODE_ENV === 'production')}
     },
     redis: {
-        host: process.env.REDIS_SERVICE_HOST || process.env.REDIS_HOST || 'localhost',
-        port: process.env.REDIS_SERVICE_PORT || process.env.REDIS_PORT || 6379,
+        host: process.env.REDIS_HOST || 'localhost',
+        port: process.env.REDIS_PORT || 6379,
         password: process.env.REDIS_PASSWORD || null
     },
     gaTagId: process.env.GOOGLE_ANALYTICS_UA || 'UA-84737854-3',
