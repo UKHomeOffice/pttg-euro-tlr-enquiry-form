@@ -119,13 +119,9 @@ pipeline:
       - ENVIRONMENT=dev
       - VERSION=build-${DRONE_BUILD_NUMBER}
       - KUBE_SERVER=https://kube-api-notprod.notprod.acp.homeoffice.gov.uk
-      - POISE_RANGES=62.25.109.196/32,52.209.62.128/25
-      - GOVWIFI_RANGES=167.98.162.0/25,167.98.158.128/25
-      - ACPTUNNEL_RANGES=52.56.221.216/32,18.130.11.142/32,18.130.6.5/32
     secrets:
       - pttg_rps_dev
     commands:
-      - export WHITELIST="$${POISE_RANGES},$${GOVWIFI_RANGES},$${ACPTUNNEL_RANGES}"
       - cd kube-pttg-euro-tlr-enquiry-form
       - ./deploy.sh
     when:
@@ -138,15 +134,11 @@ pipeline:
       - KUBE_NAMESPACE=pttg-rps-enquiry-${DRONE_DEPLOY_TO}
       - ENVIRONMENT=${DRONE_DEPLOY_TO}
       - KUBE_SERVER=https://kube-api-notprod.notprod.acp.homeoffice.gov.uk
-      - POISE_RANGES=62.25.109.196/32,52.209.62.128/25
-      - GOVWIFI_RANGES=167.98.162.0/25,167.98.158.128/25
-      - ACPTUNNEL_RANGES=52.56.221.216/32,18.130.11.142/32,18.130.6.5/32
     secrets:
       - pttg_rps_dev
       - pttg_rps_test
       - notify_recipient_notprod
     commands:
-      - export WHITELIST="$${POISE_RANGES},$${GOVWIFI_RANGES},$${ACPTUNNEL_RANGES}"
       - cd kube-pttg-euro-tlr-enquiry-form
       - ./deploy.sh
     when:
