@@ -19,6 +19,8 @@ const ConfirmationPage = require('./pages/confirmation');
 
 const Leave = require('./pages/leave');
 
+const MaintenancePage = require('./pages/maintenance');
+
 const pagesToSteps = pages => (pages.reduce((obj, item) => {
     obj[item.path] = item.properties;
     return obj;
@@ -39,6 +41,7 @@ module.exports = {
         SupportingOrgApplicationPage2,
         SummaryPage,
         ConfirmationPage,
-        Leave
+        Leave,
+        MaintenancePage
     ])
 };
