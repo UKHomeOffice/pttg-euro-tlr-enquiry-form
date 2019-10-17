@@ -1,6 +1,6 @@
 {
   "start": {
-    "heading": "Gofynnwch gwestiwn ynglŷn â gwneud cais am Ganiatâd i Aros Dros Dro Ewropeaidd (Euro TLR)"
+    "header": "Gofynnwch gwestiwn ynglŷn â gwneud cais am Ganiatâd i Aros Dros Dro Ewropeaidd (Euro TLR)"
   },
   "question": {
     "header": "Eich cwestiwn a manylion cyswllt"
@@ -40,5 +40,8 @@
   },
   "confirmation": {
     "panel": "Mae eich cwestiwn wedi cael ei anfon"
+  },
+  "leave": {
+    "header": "Diolch yn fawr"
   }
 }

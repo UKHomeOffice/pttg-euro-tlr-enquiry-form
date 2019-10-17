@@ -1,6 +1,6 @@
 {
   "start": {
-    "heading": "Ask a question about applying for European Temporary Leave to Remain (Euro TLR)"
+    "header": "Ask a question about applying for European Temporary Leave to Remain (Euro TLR)"
   },
   "question": {
     "header": "Your question and contact details"
@@ -40,5 +40,8 @@
   },
   "confirmation": {
     "panel": "Your question has been sent"
+  },
+  "leave": {
+    "header": "Thank you"
   }
 }
