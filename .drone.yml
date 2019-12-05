@@ -2,7 +2,7 @@ pipeline:
 
   npm-audit:
     group: build
-    image: node:12
+    image: quay.io/ukhomeofficedigital/nodejs-base:v8.11.1
     commands:
       # hof has issues of its own which we have to accept. Count all the vulnerabilities
       # that aren't from hof and are moderate or worse.
