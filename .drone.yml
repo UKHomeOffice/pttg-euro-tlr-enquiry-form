@@ -4,7 +4,14 @@ pipeline:
     group: build
     image: node:12
     commands:
-      - npm audit --audit-level=moderate --production
+      # hof has issues of its own which we have to accept. Count all the vulnerabilities
+      # that aren't from hof and are moderate or worse.
+      - vulnerability_count=$(npm audit --production --parseable | \
+        grep -v 'hof>' | \
+        cut -f 3 | \
+        grep -E '(critical|high|moderate)' \
+        | wc -l)
+      - test $vulnerability_count -eq 0
     when:
       event: push
 
